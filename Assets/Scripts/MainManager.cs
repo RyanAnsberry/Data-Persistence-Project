@@ -11,6 +11,7 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text HighscoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -40,6 +41,8 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
+        HighscoreText.text = $"High Score : {PlayerDataManager.Instance.CurrentLeader} : {PlayerDataManager.Instance.HighScore}";
+
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -65,12 +68,15 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
+        PlayerDataManager.Instance.PlayerScore = m_Points;
+        PlayerDataManager.Instance.CheckHighScore();
         ScoreText.text = $"Score : {m_Points}";
     }
 
     public void GameOver()
     {
         m_GameOver = true;
+        PlayerDataManager.Instance.SaveGameRank();
         GameOverText.SetActive(true);
     }
 }
