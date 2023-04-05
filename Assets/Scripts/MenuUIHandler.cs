@@ -13,14 +13,8 @@ public class MenuUIHandler : MonoBehaviour
 
     private void Start()
     {
-        SetHighScore();
-    }
+        HighScoreText.text = PlayerDataManager.Instance.HighScoreText();
 
-    private void SetHighScore()
-    {
-        int highScore = PlayerDataManager.Instance.HighScore;
-        string currentLeader = PlayerDataManager.Instance.CurrentLeader;
-        HighScoreText.text = $"High Score : {currentLeader} : {highScore}";
     }
 
     public void StartGame()
